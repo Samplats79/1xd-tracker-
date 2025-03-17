@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+header h1 {
+    color: red;
+    margin-top: 20px;
+    font-size: 3rem;
+}
+
+.info, .Vandaag {
+    margin: 20px 0;
+}
+
+.maand, .info-btn {
+    background-color: red;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.maand:hover, .info-btn:hover {
+    background-color: darkred;
+}
+
+.calendar {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: red;
+}
+
+th, td {
+    width: 14.28%;
+    height: 80px;
+    border: 1px solid gray;
+    color: white;
+    font-size: 1.5rem;
+}
+
+th {
+    background-color: darkgray;
+}
+
+td {
+    background-color: black;
+}
+
+td:nth-child(odd) {
+    background-color: darkgray;
+}
+
+td:hover {
+    background-color: red;
+}
