@@ -1,72 +1,93 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: black;
+    background-color: #111;
     color: white;
     text-align: center;
+    padding: 20px;
 }
 
 header h1 {
-    color: red;
+    color: #ff4d4d;
     margin-top: 20px;
     font-size: 3rem;
 }
 
-.info, .Vandaag {
+main p {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+#progress {
+    font-size: 2rem;
     margin: 20px 0;
 }
 
-.maand, .info-btn {
-    background-color: red;
+.buttons button, main button {
+    background-color: #ff4d4d;
     color: white;
-    font-size: 1.5rem;
-    padding: 15px 30px;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 10px;
     border: none;
     border-radius: 10px;
     cursor: pointer;
 }
 
-.maand:hover, .info-btn:hover {
-    background-color: darkred;
+button:hover {
+    background-color: #cc0000;
 }
 
+#message {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #00ff99;
+}
+
+/* Kalenderstijl */
 .calendar {
     margin-top: 50px;
     padding: 20px;
 }
 
-table {
-    width: 90%;
+.calendar h2 {
+    font-size: 2rem;
+    color: #ff4d4d;
+    margin-bottom: 20px;
+}
+
+.calendar table {
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
     border-collapse: collapse;
+    border: 2px solid #444;
     border-radius: 10px;
+    overflow: hidden;
 }
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: red;
-}
-
-th, td {
-    width: 14.28%;
-    height: 80px;
-    border: 1px solid gray;
+.calendar th,
+.calendar td {
+    height: 70px;
+    border: 1px solid #444;
+    font-size: 1.2rem;
     color: white;
-    font-size: 1.5rem;
 }
 
-th {
-    background-color: darkgray;
+.calendar th {
+    background-color: #222;
+    color: #ff4d4d;
 }
 
-td {
-    background-color: black;
+.calendar td {
+    background-color: #111;
 }
 
-td:nth-child(odd) {
-    background-color: darkgray;
+.calendar td:nth-child(odd) {
+    background-color: #1a1a1a;
 }
 
-td:hover {
-    background-color: red;
+.calendar td:hover {
+    background-color: #ff4d4d;
+    color: black;
+    cursor: pointer;
 }

@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracker</title>
+    <title>Basketbal Tracker</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <header>
-        <h1> Training Tracker</h1>
+        <h1>Basketbal Tracker</h1>
     </header>
-    
-    <div class="info">
-        <button class="maand">Info Maand</button>
-    </div>
 
-    <div class="calendar">
+    <main>
+        <p>Doel: 90 minuten basketbal per dag</p>
+        <h2 id="progress">0 / 90 minuten</h2>
+
+        <div class="buttons">
+            <button onclick="addMinutes(15)">+15 min</button>
+            <button onclick="addMinutes(30)">+30 min</button>
+            <button onclick="addMinutes(45)">+45 min</button>
+        </div>
+
+        <button onclick="resetMinutes()">Reset dag</button>
+
+        <div id="message"></div>
+    </main>
+
+    <!-- Statische kalender Maart 2025 -->
+    <section class="calendar">
+        <h2>Maart 2025</h2> 
         <table>
-            <h2>Maart 2025</h2> 
             <thead>
                 <tr>
                     <th>Ma</th>
@@ -47,10 +59,8 @@
                 </tr>
             </tbody>
         </table>
-    </div>
+    </section>
 
-    <div class="Vandaag">
-        <button class="info-btn">Info Vandaag</button>
-    </div>
+    <script src="js/script.js"></script>
 </body>
 </html>
