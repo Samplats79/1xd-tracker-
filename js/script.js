@@ -25,7 +25,7 @@ function kalender() {
         cel.textContent = "";
       } else {
         cel.textContent = d;
-        const datum = `${jaar}-${String(maand+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        const datum = `${jaar}-${String(maand + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
         if ((localStorage.getItem(datum) || 0) >= 90) {
           cel.style.backgroundColor = "#ff4d4d";
           cel.style.color = "black";
@@ -34,8 +34,12 @@ function kalender() {
         cel.onclick = () => {
           geselecteerd = datum;
           update();
-          markeer(d);
+          kalender(); 
         };
+
+        if (geselecteerd === datum) {
+          cel.style.outline = "2px solid #00ff99";
+        }
 
         d++;
       }
@@ -44,12 +48,6 @@ function kalender() {
     }
     body.appendChild(rij);
   }
-}
-
-function markeer(dag) {
-  body.querySelectorAll("td").forEach(c => {
-    c.style.outline = c.textContent == dag ? "2px solid #00ff99" : "";
-  });
 }
 
 function update() {
