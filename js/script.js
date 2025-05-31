@@ -1,71 +1,104 @@
-const m = [
-    "Januari", "Februari", "Maart", "April", "Mei", "Juni",
-    "Juli", "Augustus", "September", "Oktober", "November", "December"
-  ];
-  
-  let maand = new Date().getMonth();
-  let jaar = new Date().getFullYear();
-  
-  const titel = document.getElementById("jaar");
-  const body = document.getElementById("calendarrr");
-  
-  function kalender() {
-    titel.textContent = `${m[maand]} ${jaar}`;
-    body.innerHTML = "";
-  
-    const start = (new Date(jaar, maand, 1).getDay() + 6) % 7;
-    const totaal = new Date(jaar, maand + 1, 0).getDate();
-  
-    let d = 1;
-    for (let i = 0; i < 6; i++) {
-      const rij = document.createElement("tr");
-      for (let j = 0; j < 7; j++) {
-        const cel = document.createElement("td");
-        cel.textContent = (i === 0 && j < start) || d > totaal ? "" : d++;
-        rij.appendChild(cel);
-      }
-      body.appendChild(rij);
-    }
-  }
-  
-  function prevMonth() {
-    maand--;
-    if (maand < 0) {
-      maand = 11;
-      jaar--;
-    }
-    kalender();
-  }
-  
-  function nextMonth() {
-    maand++;
-    if (maand > 11) {
-      maand = 0;
-      jaar++;
-    }
-    kalender();
-  }
-  
-  kalender();
+const m = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+let maand = new Date().getMonth();
+let jaar = new Date().getFullYear();
+let geselecteerd = null;
 
-  let totaal = 0;
-const doel = 90;
+const titel = document.getElementById("jaar");
+const body = document.getElementById("calendarrr");
+const progress = document.getElementById("progress");
+const message = document.getElementById("message");
+
+function kalender() {
+  titel.textContent = `${m[maand]} ${jaar}`;
+  body.innerHTML = "";
+
+  const start = (new Date(jaar, maand, 1).getDay() + 6) % 7;
+  const dagen = new Date(jaar, maand + 1, 0).getDate();
+  let d = 1;
+
+  for (let i = 0; i < 6; i++) {
+    const rij = document.createElement("tr");
+    for (let j = 0; j < 7; j++) {
+      const cel = document.createElement("td");
+
+      if ((i === 0 && j < start) || d > dagen) {
+        cel.textContent = "";
+      } else {
+        cel.textContent = d;
+        const datum = `${jaar}-${String(maand+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+        if ((localStorage.getItem(datum) || 0) >= 90) {
+          cel.style.backgroundColor = "#ff4d4d";
+          cel.style.color = "black";
+        }
+
+        cel.onclick = () => {
+          geselecteerd = datum;
+          update();
+          markeer(d);
+        };
+
+        d++;
+      }
+
+      rij.appendChild(cel);
+    }
+    body.appendChild(rij);
+  }
+}
+
+function markeer(dag) {
+  body.querySelectorAll("td").forEach(c => {
+    c.style.outline = c.textContent == dag ? "2px solid #00ff99" : "";
+  });
+}
 
 function update() {
-  document.getElementById("progress").textContent = `${totaal} / ${doel} minuten`;
-  document.getElementById("message").textContent = totaal >= doel ? "🎉 Doel bereikt!" : "";
+  if (!geselecteerd) {
+    progress.textContent = `0 / 90 minuten`;
+    message.textContent = "";
+    return;
+  }
+  let min = parseInt(localStorage.getItem(geselecteerd)) || 0;
+  progress.textContent = `${min} / 90 minuten`;
+  message.textContent = min >= 90 ? "🎉 Doel bereikt!" : "";
 }
 
 function addMinutes(m) {
-  totaal += m;
+  if (!geselecteerd) return;
+  let min = parseInt(localStorage.getItem(geselecteerd)) || 0;
+  localStorage.setItem(geselecteerd, min + m);
   update();
+  kalender();
 }
 
 function resetMinutes() {
-  totaal = 0;
+  if (!geselecteerd) return;
+  localStorage.setItem(geselecteerd, 0);
+  update();
+  kalender();
+}
+
+function prevMonth() {
+  maand--;
+  if (maand < 0) {
+    maand = 11;
+    jaar--;
+  }
+  geselecteerd = null;
+  kalender();
   update();
 }
 
-update();
+function nextMonth() {
+  maand++;
+  if (maand > 11) {
+    maand = 0;
+    jaar++;
+  }
+  geselecteerd = null;
+  kalender();
+  update();
+}
 
-  
+kalender();
+update();
