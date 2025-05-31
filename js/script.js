@@ -47,4 +47,25 @@ const m = [
   }
   
   kalender();
+
+  let totaal = 0;
+const doel = 90;
+
+function update() {
+  document.getElementById("progress").textContent = `${totaal} / ${doel} minuten`;
+  document.getElementById("message").textContent = totaal >= doel ? "🎉 Doel bereikt!" : "";
+}
+
+function addMinutes(m) {
+  totaal += m;
+  update();
+}
+
+function resetMinutes() {
+  totaal = 0;
+  update();
+}
+
+update();
+
   
