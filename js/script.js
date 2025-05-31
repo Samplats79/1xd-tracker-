@@ -34,7 +34,7 @@ function kalender() {
         cel.onclick = () => {
           geselecteerd = datum;
           update();
-          kalender(); 
+          kalender();
         };
 
         if (geselecteerd === datum) {
@@ -48,6 +48,8 @@ function kalender() {
     }
     body.appendChild(rij);
   }
+
+  toonStatistieken();
 }
 
 function update() {
@@ -96,6 +98,21 @@ function nextMonth() {
   geselecteerd = null;
   kalender();
   update();
+}
+
+function toonStatistieken() {
+  let totaal = 0, behaald = 0;
+  const dagen = new Date(jaar, maand + 1, 0).getDate();
+
+  for (let d = 1; d <= dagen; d++) {
+    const datum = `${jaar}-${String(maand + 1).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+    let min = +localStorage.getItem(datum) || 0;
+    totaal += min;
+    behaald += min >= 90;
+  }
+
+  document.getElementById("totaalMinuten").textContent = `Totaal minuten deze maand: ${totaal}`;
+  document.getElementById("dagenBehaald").textContent = `Dagen doel behaald: ${behaald}`;
 }
 
 kalender();
