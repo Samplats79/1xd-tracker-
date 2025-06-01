@@ -7,3 +7,6 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 COPY . /var/www/html/
 
 EXPOSE 80
+
+# ik heb het via render gedaan omdat
+# vercel niet wilt werken bij mij ik moet hun een mail sturen maar ze antwoorden pas binnen 2 werkdagen
